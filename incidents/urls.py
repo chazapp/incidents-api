@@ -1,6 +1,12 @@
 from django.contrib import admin
 from rest_framework import routers
-from incidents.app.views import IncidentViewSet, UserViewSet, GroupViewSet
+from incidents.app.views import (
+    IncidentViewSet, 
+    UserViewSet,
+    GroupViewSet,
+    MetricsAPIView,
+    HealthAPIView
+)
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -19,4 +25,6 @@ urlpatterns = [
     path('auth/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auth/logout/', TokenBlacklistView.as_view(), name='token_blacklist'),
+    path('metrics/', MetricsAPIView.as_view(), name='metrics'),
+    path('health/', HealthAPIView.as_view(), name='health'),
 ]

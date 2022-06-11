@@ -5,8 +5,8 @@
 A Django-DRF incident tracking API
 
 This project implements an incident tracking system API, written
-in Django. It used to store, index and research incident post-mortems,
-as well as tracking the "Days without incidents" metric.
+in Django-DRF. It is used to store, index and research incident post-mortems.
+It also exposes the "Days without incidents" PromQL metric.
 
 ## Requirements
 Python 3.9
@@ -36,5 +36,10 @@ GET /health => 200
 ```
 
 ```
-GET /metrics => "dayWithoutIncidents 0, numberOfIncidents"
+GET /metrics => 
+
+number_of_incidents 10
+days_without_incidents 0
 ```
+
+

@@ -1,6 +1,8 @@
+from datetime import datetime, timezone
+from django.http import HttpResponse 
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets, permissions, generics
+from rest_framework import viewsets, permissions, generics, views
 from incidents.app.serializers import UserSerializer, GroupSerializer
 from incidents.app.models import Incident
 from incidents.app.serializers import IncidentSerializer
@@ -38,3 +40,28 @@ class IncidentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class MetricsAPIView(views.APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    """
+        This method returns PromQL metrics of the Incident database.
+    """
+    def get(self, request):
+        incidents = Incident.objects.all()
+        total_incidents = incidents.count()
+        latest_incident = incidents.latest('created_at')
+        days_without_incidents = (datetime.now(timezone.utc) - latest_incident.created_at).days
+        metrics = f"""\
+        total_incidents {total_incidents}
+        days_without_incidents {days_without_incidents}
+        """
+        return HttpResponse(metrics, content_type='text/plain')
+
+
+class HealthAPIView(views.APIView):
+    """
+        This method returns health check metrics
+    """
+    def get(self, request):
+        # TODO Uptime metric ? 
+        return HttpResponse('OK', content_type='text/plain')
