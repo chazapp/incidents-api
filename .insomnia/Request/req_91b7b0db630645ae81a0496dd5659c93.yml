@@ -1,9 +1,9 @@
 _id: req_91b7b0db630645ae81a0496dd5659c93
 type: Request
 parentId: wrk_39266a3519c24b9dba21d8bbba3f7773
-modified: 1654964332331
+modified: 1654964967615
 created: 1654946672683
-url: http://localhost:8000/incidents
+url: http://localhost:8000/incidents/
 name: Incidents
 description: ""
 method: GET
