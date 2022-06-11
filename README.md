@@ -27,18 +27,19 @@ A Dockerfile is available for production purposes.
 POST /login { email, password } => 200 + { JWT, CSRF }
 POST /logout [JWT] => 200
 
-GET /incidents?limit=10&offset=0 => 200 + {"incidents": [{ title, content, severity, tags},]}
-GET /incident/<id> => 200 + { title: str, content: str, severity: int, tags: [str] }
-POST /incident [ JWT ] { title: str, content: str, severity: int, tags: [str] } => 201 + { id: int }
-PUT /incident/id [ JWT ] { title: str, content: str, severity: int, tags: [str]} => 200 + { id: int }
-DELETE /incident/id [ JWT ] => 200
+GET /incidents/ => 200 + {"incidents": [{ title, content, severity, tags},]}
+GET /incident/<:id>/ => 200 + { title: str, content: str, severity: int, tags: [str] }
+POST /incident/ [ JWT ] { title: str, content: str, severity: int, tags: [str] } => 201 + { id: int }
+PUT /incident/<:id> [ JWT ] { title: str, content: str, severity: int, tags: [str]} => 200 + { id: int }
+PATCH /incident/<:id> [ JWT ] {} => 200 + {{incident}}
+DELETE /incident/<:id> [ JWT ] => 204
 GET /health => 200
 ```
 
 ```
 GET /metrics => 
 
-number_of_incidents 10
+total_incidents 10
 days_without_incidents 0
 ```
 
