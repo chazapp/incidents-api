@@ -11,13 +11,13 @@ jobs:
           python-version: "3.9"
       - name: Install dependencies
         run: |
-        pip install -r requirements.txt
+          pip install -r requirements.txt
       - name: Run tests
         run: |
-        coverage run --source='./incidents' manage.py test incidents
+          coverage run --source='./incidents' manage.py test incidents
       - name: Generate coverage report
         run: |
-        coverage report -m --fail-under=80
+          coverage report -m --fail-under=80
       - name: Send coverage report
         uses: actions/codecov@v2
         with:
