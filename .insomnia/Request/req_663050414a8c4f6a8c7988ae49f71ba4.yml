@@ -1,0 +1,37 @@
+_id: req_663050414a8c4f6a8c7988ae49f71ba4
+type: Request
+parentId: wrk_39266a3519c24b9dba21d8bbba3f7773
+modified: 1654964331781
+created: 1654948364006
+url: "{{ _.base_url }}/incidents/"
+name: Incidents
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: >-
+    {
+    	"title": "Incident App crashed",
+    	"description": "The Incident application died today.\n Fortunately we had backups.",
+    	"status": "Resolved",
+    	"severity": "1"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_b656be54dbad452184a84d27b209c273
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: false
+  username: "{{ _.username }}"
+  password: "{{ _.password }}"
+metaSortKey: -1654948364006
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

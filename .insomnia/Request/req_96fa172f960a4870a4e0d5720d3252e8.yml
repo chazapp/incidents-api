@@ -1,0 +1,34 @@
+_id: req_96fa172f960a4870a4e0d5720d3252e8
+type: Request
+parentId: wrk_39266a3519c24b9dba21d8bbba3f7773
+modified: 1654964329192
+created: 1654950104019
+url: "{{ _.base_url }}/incidents/2/"
+name: Incident/<:id>
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"title": "foo"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_7c2a18957d194973af6b32e4f8103e6f
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: false
+  username: "{{ _.username }}"
+  password: "{{ _.password }}"
+metaSortKey: -1654949771780
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

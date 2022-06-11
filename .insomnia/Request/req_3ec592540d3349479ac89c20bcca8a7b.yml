@@ -1,0 +1,26 @@
+_id: req_3ec592540d3349479ac89c20bcca8a7b
+type: Request
+parentId: wrk_39266a3519c24b9dba21d8bbba3f7773
+modified: 1654964385157
+created: 1654949635641
+url: "{{ _.base_url }}/incidents/1"
+name: Incident
+description: ""
+method: DELETE
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: false
+  username: "{{ _.username }}"
+  password: "{{ _.password }}"
+metaSortKey: -1654949635641
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

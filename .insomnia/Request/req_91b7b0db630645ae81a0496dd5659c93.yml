@@ -1,0 +1,26 @@
+_id: req_91b7b0db630645ae81a0496dd5659c93
+type: Request
+parentId: wrk_39266a3519c24b9dba21d8bbba3f7773
+modified: 1654964332331
+created: 1654946672683
+url: http://localhost:8000/incidents
+name: Incidents
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: false
+  username: "{{ _.username }}"
+  password: "{{ _.password }}"
+metaSortKey: -1654946672683
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
