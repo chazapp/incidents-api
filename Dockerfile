@@ -1,10 +1,15 @@
 FROM python:3.9-slim
-ADD incidents /incidents
-ADD LICENSE /LICENSE
-ADD manage.py /manage.py
-ADD requirements.txt /requirements.txt
-ADD README.md /README.md
+EXPOSE 8000
+RUN useradd -ms /bin/bash incidents
+
+USER incidents
+WORKDIR /app
+ENV PATH="${PATH}:/home/incidents/.local/bin"
+ADD LICENSE /app/LICENSE
+ADD README.md /app/README.md
+ADD manage.py /app/manage.py
+ADD requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt
-CMD ["python", "manage.py", "runserver"]
-
+ADD incidents /app/incidents
+CMD python manage.py migrate ; gunicorn -b 0.0.0.0:8000 incidents.wsgi --access-logfile - --error-logfile -
