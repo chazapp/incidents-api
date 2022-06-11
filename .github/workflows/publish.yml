@@ -23,8 +23,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            incidents-api
-            ghcr.io/username/app
+            ghcr.io/chazapp/incidents-api
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -50,10 +49,7 @@ jobs:
       
       - name: Checkout assets
         uses: actions/checkout@v2
-
-      - name: Extract Git Tag
-        run: echo "GIT_TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
-
+      
       - name: Login to ghcr.io
         uses: docker/login-action@v1
         with:
@@ -74,8 +70,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            incidents-api
-            ghcr.io/username/app
+            ghcr.io/chazapp/incidents-api
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
