@@ -82,21 +82,11 @@ class IncidentAPITest(TestCase):
 
     def test_list_incident_by_status(self):
         # Create an incident...
-        factory = APIRequestFactory()
-        request = factory.post('/incidents', {
-            'title': 'Test Incident',
-            'description':
-            'Test Incident Description',
-            'status': 'Test Status',
-            'severity': 'Test Severity'
-        })
-        request.user = self.user
-        force_authenticate(request, user=self.user)
-        response = IncidentViewSet.as_view({'post': 'create'})(request)
-        self.assertEqual(response.status_code, 201)
-        incident_id = response.data['id']
+        resp = self.create_incident()
+        incident_id = resp.data['id']
         # List incident by status
-        request = factory.get(f'/incidents?status=Test Status')
+        factory = APIRequestFactory()
+        request = factory.get('/incidents/', query={"status": 'Test Status'})
         request.user = self.user
         force_authenticate(request, user=self.user)
         response = IncidentViewSet.as_view({'get': 'list'})(request)
@@ -106,16 +96,13 @@ class IncidentAPITest(TestCase):
     def test_list_incident_by_severity(self):
         # Create an incident...
         factory = APIRequestFactory()
-        request = factory.post('/incidents', {
-            'title': 'Test Incident',
-            'description':
-            'Test Incident Description',
-            'status': 'Test Status',
-            'severity': 'Test Severity'
-        })
+        resp = self.create_incident()
+        incident_id = resp.data['id']
+        # List incident by severity
+        request = factory.get('/incidents/', query={'severity': 'Test Severity'})
         request.user = self.user
         force_authenticate(request, user=self.user)
-        response = IncidentViewSet.as_view({'post': 'create'})(request)
-        self.assertEqual(response.status_code, 201)
-        incident_id = response.data['id']
-        # List incident by severity
+        response = IncidentViewSet.as_view({'get': 'list'})(request)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data['count'], 1)
+
