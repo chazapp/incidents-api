@@ -23,9 +23,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags:  
-            - ghcr.io/chazapp/incidents-api:latest
-            - ghcr.io/chazapp/incidents-api:$GIT_TAG
+          tags: ghcr.io/chazapp/incidents-api:latest, ghcr.io/chazapp/incidents-api:$GIT_TAG 
     
   publish-arm:
     runs-on: ubuntu-latest
@@ -58,7 +56,5 @@ jobs:
         with:
           context: .
           push: true
-          tags:  
-            - ghcr.io/chazapp/mtvs-back:arm64-latest
-            - ghcr.io/chazapp/incidents-api:$GIT_TAG
+          tags: ghcr.io/chazapp/incidents-api:latest-arm, ghcr.io/chazapp/incidents-api:$GIT_TAG-arm
           platforms: linux/arm64
