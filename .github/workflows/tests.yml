@@ -19,7 +19,7 @@ jobs:
         run: |
           coverage report -m --fail-under=80
       - name: Send coverage report
-        uses: actions/codecov@v2
+        uses: codecov/codecov@v2
         with:
           verbose: true
           fail_ci_if_error: true
