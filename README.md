@@ -6,7 +6,7 @@ in Django. It used to store, index and research incident post-mortems,
 as well as tracking the "Days without incidents" metric.
 
 ## Requirements
-Python 3.11
+Python 3.9
 
 ## Usage
 
