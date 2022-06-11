@@ -2,8 +2,8 @@ name: Publish
 on:
   push:
     tags:
-      - v*.*.*
-
+      - v*
+      
 jobs:
   publish-x86:
     runs-on: ubuntu-latest
