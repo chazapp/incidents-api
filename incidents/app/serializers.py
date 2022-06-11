@@ -27,7 +27,6 @@ class IncidentSerializer(serializers.Serializer):
         """
         Create and return a new `Incident` instance, given the validated data.
         """
-        print(validated_data)
         return Incident.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
