@@ -1,0 +1,26 @@
+_id: req_09c2d69ec0a144798351bc92c7677362
+type: Request
+parentId: wrk_39266a3519c24b9dba21d8bbba3f7773
+modified: 1654964949044
+created: 1654944572040
+url: "{{ _.base_url }}/users"
+name: Users
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: basic
+  useISO88591: false
+  disabled: false
+  username: "{{ _.username }}"
+  password: "{{ _.password }}"
+metaSortKey: -1654944572040
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

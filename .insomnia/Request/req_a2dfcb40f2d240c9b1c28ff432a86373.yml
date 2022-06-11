@@ -1,0 +1,29 @@
+_id: req_a2dfcb40f2d240c9b1c28ff432a86373
+type: Request
+parentId: wrk_39266a3519c24b9dba21d8bbba3f7773
+modified: 1654964821375
+created: 1654953780008
+url: "{{ _.base_url }}/auth/logout/"
+name: Logout
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: >-
+    {
+    	"refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY1NTA0MDE1NywiaWF0IjoxNjU0OTUzNzU3LCJqdGkiOiJjYjc0Yjk1MmY0YzQ0MmZiOWM5N2E0OWRlMTM3YzNjOCIsInVzZXJfaWQiOjF9.zfyJggYrELdKyxkqdrNfSNiycT_QLIMgjGITltjER64"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_a165c171c9ca484d83e1971ae0eb80c4
+authentication: {}
+metaSortKey: -1654950172115
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
