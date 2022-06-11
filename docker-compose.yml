@@ -1,0 +1,37 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14.3
+    user: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=sup3r-passw0rd
+      - POSTGRES_DB=incidents
+    volumes:
+      - incidents-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      retries: 3
+      timeout: 1s
+      interval: 1s
+
+  incidents:
+    container_name: incidents-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env.prod
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:8080/health"]
+      retries: 3
+      timeout: 1s
+      interval: 1s
+    
+
+volumes:
+  incidents-db:
