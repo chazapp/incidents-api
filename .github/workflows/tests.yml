@@ -16,7 +16,9 @@ jobs:
         env:
           SECRET_KEY: "{{ secrets.SECRET_KEY }}"
           ALLOWED_HOSTS: "http://127.0.0.1:8000"
-          DEBUG: "False"
+          DEBUG: "True"
+          ADMIN_EMAIL: "admin@chaz.pro"
+          ADMIN_PASSWORD: "sup3r-passw0rd"
         run: |
           coverage run --source='./incidents' manage.py test incidents
       - name: Generate coverage report
