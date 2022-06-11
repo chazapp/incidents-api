@@ -2,12 +2,14 @@ name: Publish
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - v*.*.*
+
 jobs:
   publish-x86:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2  
+
       - name: Login to ghcr.io
         uses: docker/login-action@v1
         with:
