@@ -1,6 +1,7 @@
 # incidents-api
 ![example workflow](https://github.com/chazapp/incidents-api/actions/workflows/tests.yml/badge.svg)
-[![codecov](https://codecov.io/gh/chazapp/incidents-api/branch/master/graph/badge.svg?token=4R1N08XREJ)](https://codecov.io/gh/chazapp/incidents-api)
+[![codecov](https://codecov.io/gh/chazapp/incidents-api/branch/master/graph/badge.svg?token=4R1N08XREJ)](https://codecov.io/gh/chazapp/incidents-api)  
+
 A Django-DRF incident tracking API
 
 This project implements an incident tracking system API, written
