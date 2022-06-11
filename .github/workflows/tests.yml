@@ -13,6 +13,10 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Run tests
+        env:
+          SECRET_KEY: "{{ secrets.SECRET_KEY }}"
+          ALLOWED_HOSTS: "http://127.0.0.1:8000"
+          DEBUG: "False"
         run: |
           coverage run --source='./incidents' manage.py test incidents
       - name: Generate coverage report
