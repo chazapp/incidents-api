@@ -30,8 +30,10 @@ if os.getenv("DEBUG") == "True":
     DEBUG = True 
 else: DEBUG= False
 
-ALLOWED_HOSTS = [] #[os.getenv("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
 
+CORS_ALLOWED_ORIGINS = [os.getenv("ALLOWED_ORIGINS")]
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -44,12 +46,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'incidents',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
