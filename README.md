@@ -26,7 +26,7 @@ ADMIN_PASSWORD=sup3r-passw0rd
 
 ## Usage
 
-Provide a .env file, then run the API locally in a dedicated virtualenv
+Provide a .env file, then run the API locally in a dedicated virtualenv:  
 
 ```
 $ vim .env
@@ -42,14 +42,18 @@ admin user from the provided environment variables. Should you make changes
 to the database schema, use `manage.py makemigrations` to create the migration
 files, then apply them to your database with `manage.py migrate`.
 
+You may also run the test suite with coverage to ensure the project is working
+as intended:  
+
+```
+$ coverage run --source='./incidents' manage.py test incidents
+$ coverage report
+```
 
 A Dockerfile is available for production deployments. It uses UWSGI and Gunicorn
 to serve the application over port 8000. A `docker-compose.yml` file is also
 available to debug the production build, providing the API and a Postgres
 database.
-
-
-
 
 ## Documentation
 
