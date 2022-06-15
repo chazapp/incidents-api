@@ -12,4 +12,4 @@ ADD requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt
 ADD incidents /app/incidents
-CMD python manage.py migrate ; gunicorn -b 0.0.0.0:8000 incidents.wsgi --access-logfile - --error-logfile -
+CMD gunicorn -b 0.0.0.0:8000 incidents.wsgi --access-logfile - --error-logfile -
