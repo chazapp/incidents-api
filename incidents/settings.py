@@ -28,12 +28,15 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.getenv("DEBUG") == "True": 
     DEBUG = True 
-else: DEBUG= False
+else: 
+    DEBUG= False
 
-ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
-
-CORS_ALLOWED_ORIGINS = [os.getenv("ALLOWED_ORIGINS")]
+CORS_ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS").split(",")
 CORS_ALLOW_CREDENTIALS = True
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
+
+print(f"Allowed Hosts: {ALLOWED_HOSTS}")
 
 # Application definition
 
@@ -145,6 +148,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Custom authentication backend
+
+AUTHENTICATION_BACKENDS = ['incidents.app.backends.EmailBackend']
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
