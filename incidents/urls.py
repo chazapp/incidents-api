@@ -5,14 +5,11 @@ from incidents.app.views import (
     UserViewSet,
     GroupViewSet,
     MetricsAPIView,
-    HealthAPIView
+    HealthAPIView,
+    AuthView
 )
 from django.urls import path, include
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenBlacklistView,
-)
+from django.contrib.auth import views as auth_views
 
 router = routers.DefaultRouter()
 router.register(r'incidents', IncidentViewSet)
@@ -22,9 +19,8 @@ router.register(r'groups', GroupViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('auth/login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('auth/logout/', TokenBlacklistView.as_view(), name='token_blacklist'),
+    path('auth/', AuthView.as_view(), name='login'),
+    path('auth/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('metrics/', MetricsAPIView.as_view(), name='metrics'),
     path('health/', HealthAPIView.as_view(), name='health'),
 ]

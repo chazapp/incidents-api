@@ -1,11 +1,43 @@
 from datetime import datetime, timezone
-from django.http import HttpResponse 
+import json
+from django import http
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.generic import View
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions, generics, views
 from incidents.app.serializers import UserSerializer, GroupSerializer
 from incidents.app.models import Incident
 from incidents.app.serializers import IncidentSerializer
+
+
+
+@method_decorator(ensure_csrf_cookie, 'dispatch')
+class AuthView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+          return render(request, 'login.html', status=403)
+        return render(request, 'login.html', status=200)
+
+    def post(self, request):
+        try:
+            data = json.loads(request.body)
+            username = data['username']
+            password = data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return JsonResponse({
+                    "id": user.pk,
+                    "username": user.get_username(),
+                })
+            return http.JsonResponse({"message": "invalid credentials"}, status=400)
+        except Exception as e:
+            return http.JsonResponse({"message": "invalid supplied data"}, status=400)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
