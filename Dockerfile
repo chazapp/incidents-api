@@ -8,8 +8,9 @@ ENV PATH="${PATH}:/home/incidents/.local/bin"
 ADD LICENSE /app/LICENSE
 ADD README.md /app/README.md
 ADD manage.py /app/manage.py
+ADD gunicorn.conf.py /app/gunicorn.conf.py
 ADD requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt
 ADD incidents /app/incidents
-CMD gunicorn -b 0.0.0.0:8000 incidents.wsgi --access-logfile - --error-logfile -
+CMD gunicorn -c /app/gunicorn.conf.py
