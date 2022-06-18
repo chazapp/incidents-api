@@ -10,6 +10,7 @@ ADD README.md /app/README.md
 ADD manage.py /app/manage.py
 ADD gunicorn.conf.py /app/gunicorn.conf.py
 ADD requirements.txt /app/requirements.txt
+ADD templates /app/
 
 RUN pip install -r requirements.txt
 ADD incidents /app/incidents
