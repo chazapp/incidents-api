@@ -1,7 +1,8 @@
 FROM python:3.9-slim
 EXPOSE 8000
+RUN apt-get update
+RUN apt-get install libpq-dev build-essential -y
 RUN useradd -ms /bin/bash incidents
-
 USER incidents
 WORKDIR /app
 ENV PATH="${PATH}:/home/incidents/.local/bin"
