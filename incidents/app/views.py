@@ -19,7 +19,9 @@ from incidents.app.serializers import IncidentSerializer
 class AuthView(View):
     def get(self, request):
         if not request.user.is_authenticated:
-          return render(request, 'login.html', status=403)
+          resp = render(request, 'login.html', status=403)
+          resp['WWW-Authenticate'] = ''
+          return resp
         return render(request, 'login.html', status=200)
 
     def post(self, request):
