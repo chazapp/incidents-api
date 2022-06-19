@@ -15,7 +15,7 @@ Environment:
 ```
 $ cat .env
 SECRET_KEY=s3cr3t-key
-ALLOWED_HOSTS=http://127.0.0.1:8000
+ALLOWED_HOSTS=127.0.0.1
 ALLOWED_ORIGINS=http://127.0.0.1:3000
 DEBUG=True
 PRODUCTION=False
