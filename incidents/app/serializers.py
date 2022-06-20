@@ -17,11 +17,11 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class IncidentSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(required=True, max_length=100)
-    description = serializers.CharField(required=True, max_length=500)
+    description = serializers.CharField(required=True)
     created_at = serializers.DateTimeField(read_only=True)
     updated_at = serializers.DateTimeField(read_only=True)
-    status = serializers.CharField(required=True, max_length=100)
-    severity = serializers.CharField(required=True, max_length=100)
+    status = serializers.CharField(required=True)
+    severity = serializers.CharField(required=True)
 
     def create(self, validated_data):
         """
