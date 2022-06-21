@@ -86,9 +86,9 @@ class MetricsAPIView(views.APIView):
         latest_incident = incidents.latest('created_at')
         days_without_incidents = (datetime.now(timezone.utc) - latest_incident.created_at).days
         metrics = f"""\
-        total_incidents {total_incidents}
-        days_without_incidents {days_without_incidents}
-        """
+total_incidents{{job="incidents"}} {total_incidents}
+days_without_incidents{{job="incidents"}} {days_without_incidents}
+"""
         return HttpResponse(metrics, content_type='text/plain')
 
 

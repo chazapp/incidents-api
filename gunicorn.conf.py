@@ -20,3 +20,4 @@ class RequestPathFilter(logging.Filter):
 
 def on_starting(server):
     server.log.access_log.addFilter(RequestPathFilter(path_re=r'^/health/$'))
+    server.log.access_log.addFilter(RequestPathFilter(path_re=r'^/metrics/$'))
