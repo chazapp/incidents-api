@@ -1,13 +1,14 @@
-from django.test import TestCase
+import re
+from django.test import TestCase, Client
 from rest_framework.test import APIRequestFactory, force_authenticate
 
-from .views import IncidentViewSet
+from .views import IncidentViewSet, AuthView
 from django.contrib.auth.models import User
 
 class IncidentAPITest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
-            username='jacob', email='jacob@…', password='top_secret')
+            username='jacob', email='jacob@incidents.com', password='top_secret')
 
     def create_incident(self, incident={}):
         incident =  {
@@ -28,7 +29,17 @@ class IncidentAPITest(TestCase):
     def test_create_incident(self):
         resp = self.create_incident()
 
+    def test_authentication_required(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.get('/auth/')
+        self.assertEqual(response.status_code, 403)
+        csrf = re.search(r'value="([^"]+)"', response.content.decode('utf-8')).group(1)
+        print(csrf)
+        response = client.post('/auth/', {'username': 'jacob@incidents.com', 'password': 'top_secret'}, content_type="application/json", headers={'X-CSRFToken': csrf})
+        print(response.content)
+        self.assertEqual(response.status_code, 200)
         
+
     def test_list_incident(self):
         factory = APIRequestFactory()
         request = factory.get('/incidents')
