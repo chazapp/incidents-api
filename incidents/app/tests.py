@@ -34,9 +34,7 @@ class IncidentAPITest(TestCase):
         response = client.get('/auth/')
         self.assertEqual(response.status_code, 403)
         csrf = re.search(r'value="([^"]+)"', response.content.decode('utf-8')).group(1)
-        print(csrf)
-        response = client.post('/auth/', {'username': 'jacob@incidents.com', 'password': 'top_secret'}, content_type="application/json", headers={'X-CSRFToken': csrf})
-        print(response.content)
+        response = client.post('/auth/', {'username': 'jacob@incidents.com', 'password': 'top_secret'}, content_type="application/json", HTTP_X_CSRFTOKEN=csrf)
         self.assertEqual(response.status_code, 200)
         
 
