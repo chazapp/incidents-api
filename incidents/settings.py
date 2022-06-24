@@ -37,6 +37,10 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
 CORS_ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS").split(",")
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = os.getenv("ALLOWED_ORIGINS").split(",")
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_HTTPONLY = False
 
 # Application definition
 
@@ -157,6 +161,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = ['incidents.app.backends.EmailBackend']
 
 CSRF_USE_SESSIONS = True
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
