@@ -81,10 +81,12 @@ class MetricsAPIView(views.APIView):
         This method returns PromQL metrics of the Incident database.
     """
     def get(self, request):
-        incidents = Incident.objects.all()
-        total_incidents = incidents.count()
-        latest_incident = incidents.latest('created_at')
-        days_without_incidents = (datetime.now(timezone.utc) - latest_incident.created_at).days
+        total_incidents = Incident.objects.count()
+        if total_incidents > 0:
+            latest_incident = Incident.objects.latest('created_at')
+            days_without_incidents = (datetime.now(timezone.utc) - latest_incident.created_at).days
+        else:
+            days_without_incidents = "NaN"
         metrics = f"""\
 total_incidents{{job="incidents"}} {total_incidents}
 days_without_incidents{{job="incidents"}} {days_without_incidents}
