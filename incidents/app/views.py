@@ -64,6 +64,12 @@ class IncidentViewSet(viewsets.ModelViewSet):
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
     permission_classes = [permissions.IsAuthenticated]
+    
+    @property
+    def default_response_headers(self):
+        headers = viewsets.ModelViewSet.default_response_headers.fget(self)
+        headers['WWW-Authenticate'] = ''
+        return headers
 
 class IncidentList(generics.ListCreateAPIView):
     queryset = Incident.objects.all()
@@ -81,6 +87,7 @@ class MetricsAPIView(views.APIView):
         This method returns PromQL metrics of the Incident database.
     """
     def get(self, request):
+        # TODO Uptime metric ? 
         total_incidents = Incident.objects.count()
         if total_incidents > 0:
             latest_incident = Incident.objects.latest('created_at')
@@ -99,5 +106,4 @@ class HealthAPIView(views.APIView):
         This method returns health check metrics
     """
     def get(self, request):
-        # TODO Uptime metric ? 
         return HttpResponse('OK', content_type='text/plain')
