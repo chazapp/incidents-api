@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import View
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets, permissions, generics, views
+from rest_framework import viewsets, permissions, generics, views, filters
 from incidents.app.serializers import UserSerializer, GroupSerializer
 from incidents.app.models import Incident
 from incidents.app.serializers import IncidentSerializer
@@ -59,27 +59,19 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class IncidentViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API endpoint that allows incidents to be viewed or edited.
     """
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
     permission_classes = [permissions.IsAuthenticated]
-    
+    search_fields = ['title', 'description']
+    filter_backends = (filters.SearchFilter,)
+
     @property
     def default_response_headers(self):
         headers = viewsets.ModelViewSet.default_response_headers.fget(self)
         headers['WWW-Authenticate'] = ''
         return headers
-
-class IncidentList(generics.ListCreateAPIView):
-    queryset = Incident.objects.all()
-    serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-class IncidentDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Incident.objects.all()
-    serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
 
 class MetricsAPIView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
