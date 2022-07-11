@@ -9,6 +9,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import View
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions, generics, views, filters
+from rest_framework.pagination import LimitOffsetPagination
 from incidents.app.serializers import UserSerializer, GroupSerializer
 from incidents.app.models import Incident
 from incidents.app.serializers import IncidentSerializer
@@ -66,6 +67,7 @@ class IncidentViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     search_fields = ['title', 'description']
     filter_backends = (filters.SearchFilter,)
+    pagination_class = LimitOffsetPagination
 
     @property
     def default_response_headers(self):
