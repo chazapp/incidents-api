@@ -68,6 +68,7 @@ class IncidentViewSet(viewsets.ModelViewSet):
     search_fields = ['title', 'description']
     filter_backends = (filters.SearchFilter,)
     pagination_class = LimitOffsetPagination
+    ordering_fields = '(-created_at, -updated_at)'
 
     @property
     def default_response_headers(self):
