@@ -1,17 +1,19 @@
 FROM python:3.9-slim
 EXPOSE 8000
-RUN apt-get update
+RUN apt-get update && apt-get upgrade
 RUN apt-get install libpq-dev build-essential -y
+RUN rm -rf /var/lib/apt/lists
 RUN useradd -ms /bin/bash incidents
+
 USER incidents
 WORKDIR /app
 ENV PATH="${PATH}:/home/incidents/.local/bin"
-ADD LICENSE /app/LICENSE
-ADD README.md /app/README.md
-ADD manage.py /app/manage.py
-ADD gunicorn.conf.py /app/gunicorn.conf.py
-ADD requirements.txt /app/requirements.txt
-ADD templates /app/templates
+COPY LICENSE /app/LICENSE
+COPY README.md /app/README.md
+COPY manage.py /app/manage.py
+COPY gunicorn.conf.py /app/gunicorn.conf.py
+COPY requirements.txt /app/requirements.txt
+COPY templates /app/templates
 
 RUN pip install -r requirements.txt
 ADD incidents /app/incidents
