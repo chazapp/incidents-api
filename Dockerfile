@@ -1,7 +1,7 @@
 FROM python:3.9-slim
 EXPOSE 8000
-RUN apt-get update && apt-get upgrade
-RUN apt-get install libpq-dev build-essential -y
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install libpq-dev build-essential curl -y
 RUN rm -rf /var/lib/apt/lists
 RUN useradd -ms /bin/bash incidents
 
