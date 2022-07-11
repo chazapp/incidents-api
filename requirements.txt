@@ -1,7 +1,7 @@
 asgiref==3.5.2
 attrs==21.4.0
 coverage==6.4.1
-Django==4.0.5
+Django==4.0.6
 django-cors-headers==3.13.0
 django-nose==1.4.7
 djangorestframework==3.13.1
