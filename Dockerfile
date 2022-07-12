@@ -1,8 +1,7 @@
-FROM python:3.9-slim
+FROM python:3.9-alpine
 EXPOSE 8000
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install libpq-dev build-essential -y
-RUN rm -rf /var/lib/apt/lists
+RUN apk update
+RUN apk add libpq-dev build-essential -y
 RUN useradd -ms /bin/bash incidents
 
 USER incidents
