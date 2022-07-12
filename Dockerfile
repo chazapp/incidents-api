@@ -1,7 +1,7 @@
 FROM python:3.9-alpine
 EXPOSE 8000
 RUN apk update
-RUN apk add libpq-dev build-essential -y
+RUN apk add libpq-dev build-essential
 RUN useradd -ms /bin/bash incidents
 
 USER incidents
