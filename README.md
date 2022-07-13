@@ -66,15 +66,14 @@ documentation. A test suite is also available to test all routes.
 ## Features
 
 ```
-POST /login { email, password } => 200 + { JWT, CSRF }
-POST /logout [JWT] => 200
-
+POST /login { email, password } => Session cookie
+POST /logout
 GET /incidents/ => 200 + {"incidents": [{ title, content, severity, tags},]}
 GET /incident/<:id>/ => 200 + { title: str, content: str, severity: int, tags: [str] }
-POST /incident/ [ JWT ] { title: str, content: str, severity: int, tags: [str] } => 201 + { id: int }
-PUT /incident/<:id> [ JWT ] { title: str, content: str, severity: int, tags: [str]} => 200 + { id: int }
-PATCH /incident/<:id> [ JWT ] {} => 200 + {{incident}}
-DELETE /incident/<:id> [ JWT ] => 204
+POST /incident/ { title: str, content: str, severity: int, tags: [str] } => 201 + { id: int }
+PUT /incident/<:id> { title: str, content: str, severity: int, tags: [str]} => 200 + { id: int }
+PATCH /incident/<:id> {} => 200 + {{incident}}
+DELETE /incident/<:id> => 204
 GET /health => 200
 ```
 
