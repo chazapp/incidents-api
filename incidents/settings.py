@@ -18,7 +18,7 @@ from opentelemetry import trace
 from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor
+from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter
 
 load_dotenv()
 
@@ -185,8 +185,8 @@ REST_FRAMEWORK = {
 if os.getenv("TRACING_BACKEND_HOST"):
     DjangoInstrumentor().instrument()
     trace.set_tracer_provider(
-    TracerProvider(
-            resource=Resource.create({SERVICE_NAME: "incidents-api"})
+        TracerProvider(
+                resource=Resource.create({SERVICE_NAME: "incidents-api"})
         )
     )
     tracer = trace.get_tracer(__name__)
