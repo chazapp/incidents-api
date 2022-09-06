@@ -84,4 +84,6 @@ total_incidents 10
 days_without_incidents 0
 ```
 
-
+This project provides an OpenTelemetry exporter. Export the `TRACING_BACKEND_HOST`
+environment variable pointing to a gRPC/HTTP OpenTelemetry-compatible traces backend
+to instrument your deployment. 
