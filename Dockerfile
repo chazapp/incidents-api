@@ -14,6 +14,7 @@ COPY gunicorn.conf.py /app/gunicorn.conf.py
 COPY requirements.txt /app/requirements.txt
 COPY templates /app/templates
 
+ENV GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS 16 
 RUN pip install -r requirements.txt
 COPY incidents /app/incidents
 CMD gunicorn -c /app/gunicorn.conf.py
