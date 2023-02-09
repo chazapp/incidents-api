@@ -13,12 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from opentelemetry.instrumentation.django import DjangoInstrumentor
-from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
-from opentelemetry.sdk.resources import SERVICE_NAME, Resource
-from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter
 
 load_dotenv()
 
@@ -181,21 +175,3 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication'
     )
 }
-
-if os.getenv("TRACING_BACKEND_HOST"):
-    DjangoInstrumentor().instrument()
-    trace.set_tracer_provider(
-        TracerProvider(
-                resource=Resource.create({SERVICE_NAME: "incidents-api"})
-        )
-    )
-    tracer = trace.get_tracer(__name__)
-    otlp_exporter = OTLPSpanExporter(
-        endpoint=os.getenv("TRACING_BACKEND_HOST"),
-    )
-
-    # Create a BatchSpanProcessor and add the exporter to it
-    span_processor = BatchSpanProcessor(otlp_exporter)
-
-    # add to the tracer
-    trace.get_tracer_provider().add_span_processor(span_processor)
